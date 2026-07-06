@@ -6,9 +6,9 @@ on:
       - develop
 
 jobs:
-  ci:
-    name: Continuous Integration (CI)
-    runs-on: ubuntu-latest
+  deploy:
+    name: Build & Deploy (Self-Hosted)
+    runs-on: self-hosted
 
     steps:
       - name: Checkout Code
@@ -24,15 +24,6 @@ jobs:
 
       - name: Lint and Build Check (Type Check)
         run: bun run build
-
-  cd:
-    name: Continuous Deployment (CD)
-    needs: ci
-    runs-on: self-hosted
-
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
 
       - name: Sync Files to Apps Directory
         run: |
