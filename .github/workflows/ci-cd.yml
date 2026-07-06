@@ -34,6 +34,12 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
+      - name: Sync Files to Apps Directory
+        run: |
+          mkdir -p $HOME/apps/test-npm
+          rsync -av --delete --exclude='.git' ./ $HOME/apps/test-npm/
+
       - name: Deploy Production Container
         run: |
+          cd $HOME/apps/test-npm
           docker compose -f docker-compose.prod.yml up -d --build
