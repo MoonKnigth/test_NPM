@@ -1,0 +1,13 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    container_name: landing_page_prod
+    restart: always
+    networks:
+      - npm_network
+
+networks:
+  npm_network:
+    external: true
